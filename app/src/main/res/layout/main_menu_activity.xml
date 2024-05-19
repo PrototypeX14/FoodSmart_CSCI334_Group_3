@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/shoppingListLabelMainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/shoppingListButton"
+        android:text="@string/shopping_list_label"
+        app:layout_constraintEnd_toEndOf="@+id/shoppingListButton"
+        app:layout_constraintStart_toStartOf="@+id/shoppingListButton"
+        app:layout_constraintTop_toBottomOf="@+id/shoppingListButton" />
+
+    <ImageButton
+        android:id="@+id/fridgeButton"
+        android:layout_width="194dp"
+        android:layout_height="194dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/light_blue"
+        android:contentDescription="@string/fridge_label"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shoppingListLabelMainMenu"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/fridge" />
+
+    <TextView
+        android:id="@+id/fridgeLabelMainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/fridgeButton"
+        android:text="@string/fridge_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/fridgeButton"
+        app:layout_constraintTop_toBottomOf="@+id/fridgeButton" />
+
+    <ImageButton
+        android:id="@+id/groupsButton"
+        android:layout_width="194dp"
+        android:layout_height="194dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/light_blue"
+        android:contentDescription="@string/groups_button_content_description"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/shoppingListButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/group" />
+
+    <ImageButton
+        android:id="@+id/shoppingListButton"
+        android:layout_width="194dp"
+        android:layout_height="194dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/light_blue"
+        android:contentDescription="@string/shopping_list_label"
+        android:scaleType="fitStart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/shopping_cart" />
+
+
+    <TextView
+        android:id="@+id/groupLabelMainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/groupsButton"
+        android:text="@string/groups_button_content_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shoppingListButton" />
+
+    <ImageButton
+        android:id="@+id/reportsButton"
+        android:layout_width="194dp"
+        android:layout_height="194dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/light_blue"
+        android:contentDescription="@string/reports_label"
+        android:scaleType="fitStart"
+        app:layout_constraintEnd_toStartOf="@+id/fridgeButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shoppingListLabelMainMenu"
+        app:srcCompat="@drawable/report" />
+
+    <TextView
+        android:id="@+id/reportsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/reportsButton"
+        android:text="@string/reports_label"
+        app:layout_constraintEnd_toEndOf="@+id/reportsButton"
+        app:layout_constraintStart_toStartOf="@+id/reportsButton"
+        app:layout_constraintTop_toBottomOf="@+id/reportsButton" />
+
+    <ImageButton
+        android:id="@+id/mealPlansButton"
+        android:layout_width="194dp"
+        android:layout_height="194dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/light_blue"
+        android:contentDescription="@string/meal_plans_label"
+        android:scaleType="fitStart"
+        app:layout_constraintEnd_toStartOf="@+id/accountButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reportsLabel"
+        app:srcCompat="@drawable/dinner" />
+
+    <TextView
+        android:id="@+id/mealPlansLabelMainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/mealPlansButton"
+        android:text="@string/meal_plans_label"
+        app:layout_constraintEnd_toEndOf="@+id/mealPlansButton"
+        app:layout_constraintStart_toStartOf="@+id/mealPlansButton"
+        app:layout_constraintTop_toBottomOf="@+id/mealPlansButton" />
+
+    <ImageButton
+        android:id="@+id/accountButton"
+        android:layout_width="194dp"
+        android:layout_height="194dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/light_blue"
+        android:contentDescription="@string/account_label"
+        android:scaleType="fitStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fridgeLabelMainMenu"
+        app:srcCompat="@drawable/user" />
+
+    <TextView
+        android:id="@+id/accountLabelMainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/accountButton"
+        android:text="@string/account_label"
+        app:layout_constraintEnd_toEndOf="@+id/accountButton"
+        app:layout_constraintStart_toStartOf="@+id/accountButton"
+        app:layout_constraintTop_toBottomOf="@+id/accountButton" />
+    <!--
+        <a href="https://www.flaticon.com/free-icons/group" title="group icons">Group icons created by Prosymbols - Flaticon</a>
+        <a href="https://www.flaticon.com/free-icons/smart-cart" title="smart cart icons">Smart cart icons created by Freepik - Flaticon</a>
+        <a href="https://www.flaticon.com/free-icons/fridge" title="fridge icons">Fridge icons created by Freepik - Flaticon</a>
+        <a href="https://www.flaticon.com/free-icons/lunch" title="lunch icons">Lunch icons created by Freepik - Flaticon</a>
+        <a href="https://www.flaticon.com/free-icons/report" title="report icons">Report icons created by Freepik - Flaticon</a>
+        <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
+        -->
+</androidx.constraintlayout.widget.ConstraintLayout>

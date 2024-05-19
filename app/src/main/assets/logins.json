@@ -1,0 +1,4 @@
+[
+	{"id": 1, "username": "test", "password": "test", "groups": [1]},
+	{"id": 2, "username": "test2@gmail.com", "password": "testPassword", "groups": []}
+]
