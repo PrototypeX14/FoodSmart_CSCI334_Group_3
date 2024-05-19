@@ -13,6 +13,12 @@
         android:theme="@style/Theme.FoodSmartCSCI334Group3"
         tools:targetApi="31">
         <activity
+            android:name=".AddMealPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MealPlanActivity"
+            android:exported="false" />
+        <activity
             android:name=".ReportsActivity"
             android:exported="false" />
         <activity

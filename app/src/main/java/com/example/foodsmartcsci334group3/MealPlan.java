@@ -12,23 +12,24 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MealPlan {
     public static final String MEAL_PLAN_FILE = "mealPlan.json";
     private List<ValuePair<FoodItem, Double>> mIngredients;
     private int mUserId;
-    private Date
+    private ZonedDateTime mDate;
 
     public MealPlan() {
-        this(-1, null);
+        this(-1, null, null);
     }
 
-    public MealPlan(int inUId, List<ValuePair<FoodItem, Double>> inIngredients) {
+    public MealPlan(int inUId, List<ValuePair<FoodItem, Double>> inIngredients, ZonedDateTime date) {
         mUserId = inUId;
         mIngredients = inIngredients;
+        mDate = date;
     }
 
     public static boolean doesLocalFileExist(Context context) {
@@ -51,18 +52,18 @@ public class MealPlan {
         fOut.close();
     }
 
-    private static void addToLocalFile(Context context, JSONObject newUser) throws IOException, JSONException {
+    private static void addToLocalFile(Context context, JSONObject newPlan) throws IOException, JSONException {
         List<MealPlan> existingPlans = getPlans(context);
-        JSONArray usersAsJson = new JSONArray();
+        JSONArray plansAsJson = new JSONArray();
 
         for(MealPlan m:existingPlans) {
-            JSONObject userJson = mealPlanToJson(m);
-            usersAsJson.put(userJson);
+            JSONObject planJson = mealPlanToJson(m);
+            plansAsJson.put(planJson);
         }
-        usersAsJson.put(newUser);
+        plansAsJson.put(newPlan);
 
         FileOutputStream fOut = context.openFileOutput(MEAL_PLAN_FILE, Context.MODE_PRIVATE);
-        fOut.write(usersAsJson.toString().getBytes());
+        fOut.write(plansAsJson.toString().getBytes());
         fOut.close();
     }
 
@@ -78,6 +79,7 @@ public class MealPlan {
             ingredients.put(ingredient);
         }
         planJson.put("ingredients", ingredients);
+        planJson.put("date", m.getDate().toString());
 
         return planJson;
     }
@@ -102,13 +104,63 @@ public class MealPlan {
 
     private static MealPlan getMealPlanFromJson(JsonReader jsonReader) throws IOException {
         MealPlan mealPlan = new MealPlan();
-
+        List<ValuePair<FoodItem, Double>> list = new ArrayList<>();
         jsonReader.beginObject();
+        while (jsonReader.hasNext()) {
+            String name = jsonReader.nextName();
+            switch (name) {
+                case "userId":
+                    mealPlan.setUserId(jsonReader.nextInt());
+                    break;
+                case "ingredients":
+                    jsonReader.beginArray();
+                    while (jsonReader.hasNext()) {
+                        String iName = jsonReader.nextName();
+                        FoodItem foodItem = null;
+                        double quantity = 0.0;
+                        switch (iName) {
+                            case"foodName":
+                                foodItem = FoodItem.getItemByName(jsonReader.nextString());
+                                break;
+                            case"quantity":
+                                quantity = jsonReader.nextDouble();
+                                break;
+                        }
+                        list.add(new ValuePair<>(foodItem, quantity));
+                        mealPlan.setIngredients(list);
+                    }
+                    break;
+                case "date":
+                    mealPlan.setDate(ZonedDateTime.parse(jsonReader.nextString()));
+                    break;
+            }
+        }
+        jsonReader.endObject();
 
-        return null;
+        return mealPlan;
     }
 
     private int getUserId() {
         return mUserId;
+    }
+
+    private void setUserId(int newId) {
+        mUserId = newId;
+    }
+
+    public ZonedDateTime getDate() {
+        return mDate;
+    }
+
+    public void setDate(ZonedDateTime calendar) {
+        mDate = calendar;
+    }
+
+    public List<ValuePair<FoodItem, Double>> getIngredients() {
+        return mIngredients;
+    }
+
+    public void setIngredients(List<ValuePair<FoodItem, Double>> newIngredients) {
+        mIngredients = newIngredients;
     }
 }

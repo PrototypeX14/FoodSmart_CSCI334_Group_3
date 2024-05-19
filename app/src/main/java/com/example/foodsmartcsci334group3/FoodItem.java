@@ -103,6 +103,11 @@ public class FoodItem {
         return foodItem;
     }
 
+    //TODO Make this method
+    public static FoodItem getItemByName(String s) {
+        return null;
+    }
+
     public String getName() {
         return name;
     }

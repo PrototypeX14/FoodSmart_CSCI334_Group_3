@@ -38,4 +38,8 @@
     <string name="current_Items">Current items</string>
     <string name="zero">0</string>
     <string name="subtract_item">Subtract Item</string>
+    <string name="personal_report">Get Personal Report</string>
+    <string name="report_placeholder">Example Report Text</string>
+    <string name="add_meal">Add Meal</string>
+    <string name="placeholder_meal_jnfo">Meal Info</string>
 </resources>
