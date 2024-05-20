@@ -19,7 +19,7 @@ public class FoodItemRecyclerAdapter extends RecyclerView.Adapter<FoodItemRecycl
     private final List<FoodItem> mFoodItems;
     private final ShoppingList mShoppingList;
     private final Context mContext;
-    private ClickDetector mClickDetector;
+    private final ClickDetector mClickDetector;
 
     public FoodItemRecyclerAdapter(Context context, List<FoodItem> foodItems, ShoppingList shoppingList, ClickDetector clickDetector) {
         mContext = context;

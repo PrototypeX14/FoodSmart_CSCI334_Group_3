@@ -97,6 +97,7 @@
         android:background="@color/light_blue"
         android:contentDescription="@string/reports_label"
         android:scaleType="fitStart"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/fridgeButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +110,7 @@
         android:layout_height="wrap_content"
         android:labelFor="@id/reportsButton"
         android:text="@string/reports_label"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/reportsButton"
         app:layout_constraintStart_toStartOf="@+id/reportsButton"
         app:layout_constraintTop_toBottomOf="@+id/reportsButton" />
@@ -122,6 +124,7 @@
         android:background="@color/light_blue"
         android:contentDescription="@string/meal_plans_label"
         android:scaleType="fitStart"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/accountButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,6 +137,7 @@
         android:layout_height="wrap_content"
         android:labelFor="@id/mealPlansButton"
         android:text="@string/meal_plans_label"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/mealPlansButton"
         app:layout_constraintStart_toStartOf="@+id/mealPlansButton"
         app:layout_constraintTop_toBottomOf="@+id/mealPlansButton" />
@@ -147,6 +151,7 @@
         android:background="@color/light_blue"
         android:contentDescription="@string/account_label"
         android:scaleType="fitStart"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,6 +164,7 @@
         android:layout_height="wrap_content"
         android:labelFor="@id/accountButton"
         android:text="@string/account_label"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/accountButton"
         app:layout_constraintStart_toStartOf="@+id/accountButton"
         app:layout_constraintTop_toBottomOf="@+id/accountButton" />

@@ -34,7 +34,7 @@ public class ShoppingListRecyclerAdapter extends RecyclerView.Adapter<ShoppingLi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.mFoodName.setText(mShoppingList.getFoodList().get(position).getLabel().getName());
-        holder.mQuantity.setText(mShoppingList.getFoodList().get(position).getValue());
+        holder.mQuantity.setText(String.valueOf(mShoppingList.getFoodList().get(position).getValue()));
     }
 
     @Override

@@ -314,6 +314,7 @@ public class Group {
                     while (jsonReader.hasNext()) {
                         adminIds.add(jsonReader.nextInt());
                     }
+                    jsonReader.endArray();
                     break;
                 case "groupIconUri":
                     iconUri = jsonReader.nextString();
@@ -383,9 +384,11 @@ public class Group {
                         while (jsonReader.hasNext()) {
                             adminIds.add(jsonReader.nextInt());
                         }
+                        jsonReader.endArray();
                         break;
                     case "groupIconUri":
                         iconUri = jsonReader.nextString();
+                        break;
                     case "groupIconRef":
                         iconRef = context.getResources().getIdentifier(jsonReader.nextString(), "drawable", context.getPackageName());
                         break;

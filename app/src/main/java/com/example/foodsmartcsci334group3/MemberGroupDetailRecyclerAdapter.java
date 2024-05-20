@@ -88,10 +88,13 @@ public class MemberGroupDetailRecyclerAdapter extends RecyclerView.Adapter<Membe
             ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(
                     itemView.getContext(),
                     R.array.adminGroupSpinnerOptions,
-                    R.layout.group_detail_member_card
+                    android.R.layout.simple_spinner_item
             );
-            arrayAdapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             adminRoleAssigner.setAdapter(arrayAdapter);
+            if (mGroup.isUserAdmin(mUserId)) {
+                adminRoleAssigner.setSelection(1);
+            }
         }
 
         public void adminKick_OnClick(View v) {

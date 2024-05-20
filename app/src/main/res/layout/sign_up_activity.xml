@@ -122,6 +122,7 @@
         android:layout_height="wrap_content"
         android:text="@string/passwords_do_not_match"
         android:textColor="@color/design_default_color_error"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/signUpContinueButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

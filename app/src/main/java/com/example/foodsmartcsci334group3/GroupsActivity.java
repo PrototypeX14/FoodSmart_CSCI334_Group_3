@@ -31,8 +31,14 @@ public class GroupsActivity extends AppCompatActivity {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        MyGroupsRecyclerAdapter myGroupsRecyclerAdapter = new MyGroupsRecyclerAdapter(this, user);
-        myGroupsRecycler.setAdapter(myGroupsRecyclerAdapter);
+        try {
+            if (!Group.getUsersGroups(this, mUserId).isEmpty()) {
+                MyGroupsRecyclerAdapter myGroupsRecyclerAdapter = new MyGroupsRecyclerAdapter(this, user);
+                myGroupsRecycler.setAdapter(myGroupsRecyclerAdapter);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

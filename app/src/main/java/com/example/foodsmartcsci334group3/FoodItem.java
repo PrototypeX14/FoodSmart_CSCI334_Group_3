@@ -69,6 +69,7 @@ public class FoodItem {
             switch (name) {
                 case "id":
                     foodItem.id = jsonReader.nextInt();
+                    break;
                 case "name":
                     foodItem.setName(jsonReader.nextString());
                     break;
@@ -103,9 +104,15 @@ public class FoodItem {
         return foodItem;
     }
 
-    //TODO Make this method
-    public static FoodItem getItemByName(String s) {
-        return null;
+    public static FoodItem getItemByName(String s, Context context) throws IOException {
+        List<FoodItem> allFood = loadFoodItems(context);
+
+        for (FoodItem f: allFood) {
+            if (f.getName().equals(s)) {
+                return f;
+            }
+        }
+        return new FoodItem();
     }
 
     public String getName() {

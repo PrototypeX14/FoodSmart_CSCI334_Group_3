@@ -1,6 +1,7 @@
 package com.example.foodsmartcsci334group3;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.util.JsonReader;
 
 import org.json.JSONArray;
@@ -96,7 +97,16 @@ public class ShoppingList {
 
     public static List<ShoppingList> readAllLists(Context context) throws IOException {
         List<ShoppingList> lists = new ArrayList<>();
-        if (doesLocalFileExist(context)) {
+
+        AssetManager assetManager = context.getAssets();
+        InputStream inputStream = assetManager.open(SHOPPING_LIST_FILE);
+        JsonReader jsonReader = new JsonReader(new InputStreamReader(inputStream));
+        jsonReader.beginArray();
+        while (jsonReader.hasNext()) {
+            ShoppingList shoppingList = shoppingListFromJson(jsonReader, context);
+            lists.add(shoppingList);
+        }
+        /*if (doesLocalFileExist(context)) {
             InputStream inputStream = context.openFileInput(SHOPPING_LIST_FILE);
             JsonReader jsonReader = new JsonReader(new InputStreamReader(inputStream));
             jsonReader.beginArray();
@@ -105,8 +115,15 @@ public class ShoppingList {
                 lists.add(shoppingList);
             }
         } else {
-            createLocalFile(context);
-        }
+            AssetManager assetManager = context.getAssets();
+            InputStream inputStream = assetManager.open(SHOPPING_LIST_FILE);
+            JsonReader jsonReader = new JsonReader(new InputStreamReader(inputStream));
+            jsonReader.beginArray();
+            while (jsonReader.hasNext()) {
+                ShoppingList shoppingList = shoppingListFromJson(jsonReader, context);
+                lists.add(shoppingList);
+            }*/
+            //createLocalFile(context);
         return lists;
     }
 
@@ -117,12 +134,15 @@ public class ShoppingList {
                 return l;
             }
         }
-        return new ShoppingList();
+        return new ShoppingList(userId, context, new ArrayList<>());
     }
 
     private static ShoppingList shoppingListFromJson(JsonReader jsonReader, Context context) throws IOException {
         List<ValuePair<FoodItem, Integer>> list = new ArrayList<>();
         User user = null;
+        if (sFoodItems == null) {
+            initialiseFoodItems(context);
+        }
 
         jsonReader.beginObject();
         while (jsonReader.hasNext()) {
@@ -136,26 +156,30 @@ public class ShoppingList {
                     while (jsonReader.hasNext()) {
                         ValuePair<FoodItem, Integer> pair = new ValuePair<>(null, 0);
                         jsonReader.beginObject();
-                        String listName = jsonReader.nextName();
-
-                        switch (listName) {
-                            case "foodName":
-                                String foodName = jsonReader.nextString();
-                                for (FoodItem fI: sFoodItems) {
-                                    if (fI.getName().equals(foodName)) {
-                                        pair.setLabel(fI);
+                        while (jsonReader.hasNext()) {
+                            String listName = jsonReader.nextName();
+                            switch (listName) {
+                                case "foodName":
+                                    String foodName = jsonReader.nextString();
+                                    for (FoodItem fI: sFoodItems) {
+                                        if (fI.getName().equals(foodName)) {
+                                            pair.setLabel(fI);
+                                        }
                                     }
-                                }
-                                break;
-                            case "quantity":
-                                pair.setValue(jsonReader.nextInt());
-                                break;
+                                    break;
+                                case "quantity":
+                                    pair.setValue(jsonReader.nextInt());
+                                    break;
+                            }
                         }
+                        jsonReader.endObject();
                         list.add(pair);
                     }
+                    jsonReader.endArray();
                     break;
             }
         }
+        jsonReader.endObject();
         assert user != null;
         return new ShoppingList(user.getId(), context, list);
     }

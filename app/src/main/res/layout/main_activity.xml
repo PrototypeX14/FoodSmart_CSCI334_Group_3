@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
         android:text="@string/invalid_sign_in"
         android:textAlignment="center"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/signInButton"
         app:layout_constraintEnd_toEndOf="@+id/passwordInput"
         app:layout_constraintStart_toStartOf="@+id/passwordInput"

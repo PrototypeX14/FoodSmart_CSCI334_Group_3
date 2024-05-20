@@ -10,12 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String ARG_FOODITEMNAME = "foodName";
     public static final String ARG_USERID = "userId";
     public static final String ARG_GROUPID = "groupId";
     private List<User> mUserList;
@@ -30,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
+        /*File dir = getFilesDir();
+        File file = new File(dir, "logins.json");
+        boolean deleted = file.delete();
+        file = new File(dir, "groups.json");
+        deleted = file.delete();*/
     }
 
     private void signIn_onClick(View v) {
@@ -49,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         TextView invalidSignIn = findViewById(R.id.invalidSignIn);
         if(possiblePasswordIncorrect) {
             invalidSignIn.setText(R.string.password_incorrect);
+            invalidSignIn.setVisibility(View.VISIBLE);
         }
-        invalidSignIn.setVisibility(View.VISIBLE);
     }
 
     private void signIn_signUp_onClick(View v) {

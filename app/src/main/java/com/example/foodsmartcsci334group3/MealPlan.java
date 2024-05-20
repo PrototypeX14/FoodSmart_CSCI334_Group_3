@@ -94,7 +94,7 @@ public class MealPlan {
         JsonReader jsonReader = new JsonReader(new InputStreamReader(inputStream));
         jsonReader.beginArray();
         while (jsonReader.hasNext()) {
-            MealPlan newMealPlan = getMealPlanFromJson(jsonReader);
+            MealPlan newMealPlan = getMealPlanFromJson(jsonReader, context);
             plans.add(newMealPlan);
         }
         jsonReader.close();
@@ -102,7 +102,7 @@ public class MealPlan {
         return plans;
     }
 
-    private static MealPlan getMealPlanFromJson(JsonReader jsonReader) throws IOException {
+    private static MealPlan getMealPlanFromJson(JsonReader jsonReader, Context context) throws IOException {
         MealPlan mealPlan = new MealPlan();
         List<ValuePair<FoodItem, Double>> list = new ArrayList<>();
         jsonReader.beginObject();
@@ -120,7 +120,7 @@ public class MealPlan {
                         double quantity = 0.0;
                         switch (iName) {
                             case"foodName":
-                                foodItem = FoodItem.getItemByName(jsonReader.nextString());
+                                foodItem = FoodItem.getItemByName(jsonReader.nextString(), context);
                                 break;
                             case"quantity":
                                 quantity = jsonReader.nextDouble();

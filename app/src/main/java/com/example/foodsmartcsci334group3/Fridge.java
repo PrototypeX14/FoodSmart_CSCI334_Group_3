@@ -1,6 +1,7 @@
 package com.example.foodsmartcsci334group3;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.util.JsonReader;
 
 import org.json.JSONArray;
@@ -78,18 +79,27 @@ public class Fridge {
     }
 
     public static List<Fridge> readAllFridges(Context context) throws IOException {
+        AssetManager assetManager = context.getAssets();
+        InputStream inputStream = assetManager.open(FRIDGE_FILE);
+        JsonReader jsonReader = new JsonReader(new InputStreamReader(inputStream));
+
         List<Fridge> fridges = new ArrayList<>();
-        if (doesLocalFileExist(context)) {
-            InputStream inputStream = context.openFileInput(FRIDGE_FILE);
-            JsonReader jsonReader = new JsonReader(new InputStreamReader(inputStream));
-            jsonReader.beginArray();
-            while (jsonReader.hasNext()) {
-                Fridge fridge = fridgeFromJson(jsonReader);
-                fridges.add(fridge);
-            }
-        } else {
-            createLocalFile(context);
+        jsonReader.beginArray();
+        while (jsonReader.hasNext()) {
+            Fridge fridge = fridgeFromJson(jsonReader);
+            fridges.add(fridge);
         }
+//        if (doesLocalFileExist(context)) {
+//            InputStream inputStream = context.openFileInput(FRIDGE_FILE);
+//            JsonReader jsonReader = new JsonReader(new InputStreamReader(inputStream));
+//            jsonReader.beginArray();
+//            while (jsonReader.hasNext()) {
+//                Fridge fridge = fridgeFromJson(jsonReader);
+//                fridges.add(fridge);
+//            }
+//        } else {
+//            createLocalFile(context);
+//        }
         return fridges;
     }
 

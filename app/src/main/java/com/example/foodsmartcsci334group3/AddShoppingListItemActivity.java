@@ -29,7 +29,7 @@ public class AddShoppingListItemActivity extends AppCompatActivity{
             throw new RuntimeException(e);
         }
         ClickDetector listener = (position, info) -> {
-
+            finish();
         };
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

@@ -3,6 +3,7 @@ package com.example.foodsmartcsci334group3;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,11 +44,16 @@ public class GroupDetailActivity extends AppCompatActivity {
         gMemberRecycler.setAdapter(mRecyclerAdapter);
 
         EditText groupName = findViewById(R.id.groupNameEditText);
+        groupName.setText(mGroup.getName());
         EditText groupPassword = findViewById(R.id.groupPasswordEditText);
+        groupPassword.setText(mGroup.getPassword());
+
+        ImageView imageView = findViewById(R.id.genericIcon);
+        imageView.setImageResource(mGroup.getIconReference());
 
         if (mGroup.isUserAdmin(userId)) {
-            findViewById(R.id.groupDetailName).setVisibility(View.GONE);
-            findViewById(R.id.groupDetailPassword).setVisibility(View.GONE);
+            findViewById(R.id.groupDetailName).setVisibility(View.INVISIBLE);
+            findViewById(R.id.groupDetailPassword).setVisibility(View.INVISIBLE);
             groupName.setVisibility(View.VISIBLE);
             groupPassword.setVisibility(View.VISIBLE);
         }
@@ -80,6 +86,24 @@ public class GroupDetailActivity extends AppCompatActivity {
 
     public void addMemberFab_OnClick(View v) {
         AddMemberDialogFragment dialog = new AddMemberDialogFragment();
+        dialog.setDialogResult(new AddMemberDialogFragment.AddMemberDialogResult() {
+            @Override
+            public void onDialogFinish(String result) {
+                memberUsername = result;
+                List<User> allUsers;
+                try {
+                    allUsers = User.getUsers(getApplicationContext());
+                } catch (IOException | JSONException e) {
+                    throw new RuntimeException(e);
+                }
+                for (User u: allUsers) {
+                    if (u.getUsername().equals(memberUsername)) {
+                        mGroup.addUserId(u.getId(), v.getContext());
+                        mRecyclerAdapter.notifyItemInserted(mGroup.getUserIds().size() - 1);
+                    }
+                }
+            }
+        });
         dialog.show(getSupportFragmentManager(), "USER_ADD");
         dialog.setDialogResult(result -> {
             memberUsername = result;
